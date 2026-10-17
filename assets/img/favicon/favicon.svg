@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="goldSheen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#faecc5"/>
+      <stop offset="45%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#99771e"/>
+    </linearGradient>
+    <linearGradient id="navyCrest" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e1a32"/>
+      <stop offset="100%" stop-color="#050a16"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="url(#navyCrest)" stroke="url(#goldSheen)" stroke-width="2.5"/>
+  <path d="M18 42 C16 34 19 25 25 19 C23 23 23 28 25 33 C26 36 28 38 30 40 C25 41 21 42 18 42 Z" fill="url(#goldSheen)" opacity="0.85"/>
+  <path d="M46 42 C48 34 45 25 39 19 C41 23 41 28 39 33 C38 36 36 38 34 40 C39 41 43 42 46 42 Z" fill="url(#goldSheen)" opacity="0.85"/>
+  <path d="M26 19 L38 19 L35 32 C35 35 33 37 32 37 C31 37 29 35 29 32 Z" fill="url(#goldSheen)"/>
+  <line x1="32" y1="37" x2="32" y2="47" stroke="url(#goldSheen)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M25 47 L39 47" stroke="url(#goldSheen)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M32 8 L33.5 12.5 L38 14 L33.5 15.5 L32 20 L30.5 15.5 L26 14 L30.5 12.5 Z" fill="#ffffff"/>
+  <circle cx="21" cy="14" r="1.5" fill="#faecc5"/>
+  <circle cx="43" cy="14" r="1.5" fill="#faecc5"/>
+</svg>

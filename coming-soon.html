@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Holiday Season 2026 Portal | Coming Soon | Evergreen Events</title>
+  <meta name="description" content="Our exclusive 2026 Corporate Holiday Showcase & Venue Booking Calendar launches soon. Subscribe for VIP early access.">
+  <link rel="icon" href="assets/img/favicon/favicon.svg" type="image/svg+xml">
+  <script src="assets/js/theme.js"></script>
+  <link id="bs" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>tailwind.config={prefix:'tw-',corePlugins:{preflight:false}}</script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- Site Header -->
+  <header class="site-header sticky-top">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="assets/img/favicon/logo.svg" alt="Evergreen Events Logo" width="34" height="34" class="site-logo flex-shrink-0">
+          <span class="brand">Evergreen Events</span>
+        </a>
+
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav mx-lg-auto mb-2 mb-lg-0">
+            <!-- Home Dropdown: Exactly Two Entries -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Home</a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item d-flex align-items-center gap-2" href="index.html">
+                    <span>🏛️</span>
+                    <span>Home 1 – Signature Services</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item d-flex align-items-center gap-2" href="index-2.html">
+                    <span>🎉</span>
+                    <span>Home 2 – Corporate Celebrations</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+            <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+            <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          </ul>
+
+          <div class="nav-actions">
+            <button class="btn btn-sm btn-ghost" data-theme-toggle title="Toggle Dark/Light Mode" aria-label="Toggle theme">◐</button>
+            <button class="btn btn-sm btn-ghost" data-dir-toggle title="Toggle RTL/LTR Layout" aria-label="Toggle text direction">⇄</button>
+            <a class="btn btn-sm btn-ghost" href="login.html">Login</a>
+            <a class="btn btn-sm btn-ghost" href="register.html">Sign Up</a>
+            <a class="btn btn-gold btn-sm" href="contact.html">Plan an Event</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Coming Soon Main Content with Unique Hero Background Image -->
+  <main class="flex-grow-1 d-flex align-items-center py-5 position-relative text-center text-white cover-page-hero">
+    <div class="cover-page-bg" style="background-image: url('assets/img/hero-coming-soon.jpg');"></div>
+    <div class="cover-page-overlay"></div>
+    <div class="container py-5">
+      <div class="hero-badge anim">
+        <span>✨</span> Exclusive 2026 Holiday Showcase
+      </div>
+      <h1 class="display-4 font-serif fw-bold text-white mb-3 anim d1">Something Spectacular is Unfolding</h1>
+      <p class="lead text-white-50 mx-auto mb-4 anim d2" style="max-width: 650px;">
+        Our interactive 2026 Corporate Holiday Venue Showcase and 3D floor plan explorer goes live soon. Be the first to unlock early-bird December booking rates.
+      </p>
+
+      <!-- Functional Live Countdown Timer -->
+      <div class="cd mb-5 anim d3" id="cd">
+        <!-- Rendered dynamically by main.js countdown('2026-12-15T00:00:00') -->
+      </div>
+
+      <!-- Validated VIP Notification Form -->
+      <div class="mx-auto anim d3" style="max-width: 520px;">
+        <div class="card p-4 bg-dark bg-opacity-75 border-warning border-opacity-50 text-white backdrop-blur shadow-lg">
+          <h5 class="font-serif mb-2 text-white">Get Priority VIP Access</h5>
+          <p class="small text-muted mb-3">Enter your corporate email to receive the private booking link 48 hours before public launch.</p>
+
+          <form data-validate novalidate data-msg="You are on the VIP guest list! We will notify you the moment the showcase launches." class="d-flex flex-column gap-2">
+            <div class="text-start">
+              <label class="visually-hidden" for="cs_email">Corporate Email</label>
+              <input id="cs_email" type="email" class="form-control" data-rule="email" placeholder="name@company.com" required>
+              <div class="invalid-feedback"></div>
+            </div>
+            <button type="submit" class="btn btn-gold w-100">Notify My Organization</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="mt-4 pt-2 anim d3">
+        <a href="index.html" class="text-white-50 text-decoration-none small">← Back to Evergreen Events Homepage</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container text-center py-2 small text-muted">
+      <div>© 2026 Evergreen Events Planning Ltd. All rights reserved.</div>
+      <div class="mt-1">
+        <a href="index.html">Home</a> ·
+        <a href="contact.html">Support Concierge</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/validation.js"></script>
+  <script>
+    // Initialize functional live countdown to December 15, 2026
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.countdown) {
+        window.countdown('2026-12-15T00:00:00');
+      }
+    });
+  </script>
+</body>
+</html>

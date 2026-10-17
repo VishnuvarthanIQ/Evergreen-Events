@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page Not Found | 404 | Evergreen Events</title>
+  <meta name="description" content="The event page you are looking for cannot be found. Return to Evergreen Events homepage.">
+  <link rel="icon" href="assets/img/favicon/favicon.svg" type="image/svg+xml">
+  <script src="assets/js/theme.js"></script>
+  <link id="bs" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>tailwind.config={prefix:'tw-',corePlugins:{preflight:false}}</script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- Site Header -->
+  <header class="site-header sticky-top">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="assets/img/favicon/logo.svg" alt="Evergreen Events Logo" width="34" height="34" class="site-logo flex-shrink-0">
+          <span class="brand">Evergreen Events</span>
+        </a>
+
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav mx-lg-auto mb-2 mb-lg-0">
+            <!-- Home Dropdown: Exactly Two Entries -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Home</a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item d-flex align-items-center gap-2" href="index.html">
+                    <span>🏛️</span>
+                    <span>Home 1 – Signature Services</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item d-flex align-items-center gap-2" href="index-2.html">
+                    <span>🎉</span>
+                    <span>Home 2 – Corporate Celebrations</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+            <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+            <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          </ul>
+
+          <div class="nav-actions">
+            <button class="btn btn-sm btn-ghost" data-theme-toggle title="Toggle Dark/Light Mode" aria-label="Toggle theme">◐</button>
+            <button class="btn btn-sm btn-ghost" data-dir-toggle title="Toggle RTL/LTR Layout" aria-label="Toggle text direction">⇄</button>
+            <a class="btn btn-sm btn-ghost" href="login.html">Login</a>
+            <a class="btn btn-sm btn-ghost" href="register.html">Sign Up</a>
+            <a class="btn btn-gold btn-sm" href="contact.html">Plan an Event</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- 404 Hero Section with Unique Realistic Image -->
+  <main class="flex-grow-1 d-flex align-items-center py-5 position-relative text-center text-white cover-page-hero">
+    <div class="cover-page-bg" style="background-image: url('assets/img/hero-404.jpg');"></div>
+    <div class="cover-page-overlay"></div>
+    <div class="container py-5">
+      <div class="badge badge-gold mb-3 anim">Error 404</div>
+      <h1 class="display-1 font-serif fw-bold text-warning mb-2 anim d1">404</h1>
+      <h2 class="display-6 mb-3 anim d2">This Celebration Has Moved to Another Ballroom</h2>
+      <p class="lead text-white-50 mx-auto mb-4 anim d3" style="max-width: 600px;">
+        The page you are looking for may have been rescheduled, archived, or temporarily relocated. Let us guide you back to our main event stages.
+      </p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap anim d3">
+        <a href="index.html" class="btn btn-gold btn-lg">Return to Homepage</a>
+        <button type="button" class="btn btn-outline-light btn-lg" onclick="window.history.back()">Go Back Previous Page</button>
+      </div>
+
+      <div class="mt-5 pt-3 anim d3">
+        <div class="small text-white-50 mb-2">Popular pages to explore:</div>
+        <div class="d-flex justify-content-center gap-3 flex-wrap small">
+          <a href="services.html" class="text-warning">Corporate Services</a> ·
+          <a href="pricing.html">Pricing Packages</a> ·
+          <a href="blog.html">Planning Journal</a> ·
+          <a href="contact.html">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="d-flex justify-content-between flex-wrap gap-2 small text-muted">
+        <div>© 2026 Evergreen Events Planning Ltd. All rights reserved.</div>
+        <div>
+          <a href="index.html">Home</a> ·
+          <a href="contact.html">Support Concierge</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

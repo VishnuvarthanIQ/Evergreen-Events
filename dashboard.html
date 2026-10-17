@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Client Event Planning Dashboard | Evergreen Events</title>
+  <meta name="description" content="Dedicated client portal for Evergreen Events clients. Manage corporate holiday party timelines, vendors, guest RSVPs, and live budgets.">
+  <link rel="icon" href="assets/img/favicon/favicon.svg" type="image/svg+xml">
+  <script src="assets/js/theme.js"></script>
+  <link id="bs" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>tailwind.config={prefix:'tw-',corePlugins:{preflight:false}}</script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="dashboard-body">
+
+  <div class="dash">
+    <!-- Dedicated Dashboard Sidebar -->
+    <aside class="side">
+      <div class="d-flex justify-content-between align-items-center mb-4 pb-2 side-header">
+        <a href="index.html" class="d-flex align-items-center gap-2 text-decoration-none">
+          <img src="assets/img/favicon/logo.svg" alt="Evergreen Events Logo" width="32" height="32" class="site-logo flex-shrink-0">
+          <span class="brand fs-5">Evergreen</span>
+        </a>
+        <button class="btn btn-sm btn-ghost d-lg-none" id="sb" aria-label="Toggle navigation menu">☰</button>
+      </div>
+
+      <!-- Client Context Badge -->
+      <div class="p-2 mb-3 rounded-3 side-client-badge small">
+        <div class="fw-semibold">TechSphere Global</div>
+        <div class="small opacity-75">Holiday Gala 2026</div>
+      </div>
+
+      <nav>
+        <a href="#overview" data-t="overview" class="on">📊 Overview</a>
+        <a href="#requirements" data-t="requirements">📝 Event Brief</a>
+        <a href="#vendors" data-t="vendors">🤝 Vendors & Suppliers</a>
+        <a href="#rsvp" data-t="rsvp">🎟️ RSVP & Headcount</a>
+        <a href="#checklist" data-t="checklist">✅ Event Checklist</a>
+        <a href="#budget" data-t="budget">💰 Budget & Expenses</a>
+        <a href="#bookings" data-t="bookings">📅 Booking History</a>
+        <a href="#notifications" data-t="notifications">🔔 Notifications</a>
+        <a href="#profile" data-t="profile">👤 Organization Profile</a>
+      </nav>
+    </aside>
+
+    <!-- Main Dashboard Workspace -->
+    <main class="main p-0">
+
+      <!-- Professional Top Dashboard Header (Clearly Visible in Light & Dark Mode) -->
+      <header class="dash-topbar border-0 border-bottom px-4 py-3 mb-4 sticky-top">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+          <!-- Left: Title & Breadcrumb (Removed redundant '☰ Menu' button) -->
+          <div class="d-flex align-items-center gap-3">
+            <div>
+              <div class="d-flex align-items-center gap-2">
+                <h1 class="h5 mb-0 fw-bold font-serif text-current">Client Event Portal</h1>
+                <span class="badge badge-gold-subtle d-none d-sm-inline-block">TechSphere Global</span>
+              </div>
+              <small class="text-muted d-none d-md-block">Active Holiday Gala 2026 · Command Center</small>
+            </div>
+          </div>
+
+          <!-- Right: Complete Set of Clearly Visible Controls (Aligned Horizontally) -->
+          <div class="d-flex align-items-center gap-2 flex-nowrap flex-shrink-0">
+            <!-- Notifications Menu -->
+            <div class="dropdown">
+              <button class="btn btn-sm btn-ghost btn-dash-icon position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Recent Notifications" aria-label="Recent notifications">
+                <span aria-hidden="true">🔔</span>
+                <span class="badge rounded-pill bg-danger">3</span>
+                <span class="visually-hidden">unread notifications</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end shadow-lg p-2" style="min-width: 290px;">
+                <li class="px-2 py-1 fw-semibold small border-bottom border-secondary border-opacity-25 mb-1 d-flex justify-content-between align-items-center">
+                  <span>Event Alerts</span>
+                  <span class="badge bg-gold text-dark" style="font-size: 0.7rem;">3 New</span>
+                </li>
+                <li>
+                  <a class="dropdown-item py-2 small rounded" href="#rsvp" data-t="rsvp">
+                    <strong>🎟️ RSVP Update:</strong> 184 guests confirmed (+12 today)
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item py-2 small rounded" href="#vendors" data-t="vendors">
+                    <strong>🤝 Vendor Signed:</strong> Sound & Lighting Contract locked
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item py-2 small rounded" href="#budget" data-t="budget">
+                    <strong>💰 Budget Alert:</strong> Milestone 2 invoice processed
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Light/Dark Theme Toggle (Icon Only) -->
+            <button class="btn btn-sm btn-ghost btn-dash-icon" data-theme-toggle title="Toggle Dark/Light Theme" aria-label="Toggle theme">
+              <span class="theme-icon" aria-hidden="true">◐</span>
+            </button>
+
+            <!-- RTL/LTR Direction Toggle (Icon Only) -->
+            <button class="btn btn-sm btn-ghost btn-dash-icon" data-dir-toggle title="Toggle Text Direction (RTL/LTR)" aria-label="Toggle text direction">
+              <span aria-hidden="true">⇄</span>
+            </button>
+
+            <!-- User Profile Dropdown -->
+            <div class="dropdown">
+              <button class="btn btn-sm btn-ghost d-inline-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="User Account Menu">
+                <span class="avatar-badge bg-warning text-dark">PS</span>
+                <span class="d-none d-md-inline small fw-semibold">Priya S.</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end shadow-lg p-2" style="min-width: 220px;">
+                <li class="px-2 py-1 border-bottom border-secondary border-opacity-25 mb-1">
+                  <div class="fw-bold small">Priya Sharma</div>
+                  <div class="text-muted small" style="font-size: 0.75rem;">Corporate Event Lead</div>
+                  <div class="text-warning small" style="font-size: 0.72rem;">TechSphere Global</div>
+                </li>
+                <li><a class="dropdown-item small py-2 rounded" href="#profile" data-t="profile">👤 Organization Profile</a></li>
+                <li><a class="dropdown-item small py-2 rounded" href="#requirements" data-t="requirements">📝 Event Brief Specs</a></li>
+                <li><a class="dropdown-item small py-2 rounded" href="index.html">← Return to Website</a></li>
+                <li><button type="button" class="dropdown-item small py-2 rounded text-warning" onclick="resetDashboardData()">↺ Reset Demo Data</button></li>
+                <li><hr class="dropdown-divider my-1"></li>
+                <li><button type="button" class="dropdown-item small py-2 rounded text-danger" data-bs-toggle="modal" data-bs-target="#logoutModal">🚪 Log Out</button></li>
+              </ul>
+            </div>
+
+            <!-- Clearly Visible Redesigned Logout Button with Confirmation Trigger -->
+            <button type="button" class="btn btn-sm btn-dash-logout" data-bs-toggle="modal" data-bs-target="#logoutModal" title="Sign out of client portal">
+              <span aria-hidden="true">🚪</span>
+              <span class="small fw-semibold">Logout</span>
+            </button>
+          </div>
+        </div>
+      </header>
+ 
+      <!-- Mobile Navigation Menu (Displays down below Client Event Portal when toggle is clicked) -->
+      <div id="dashMobileNav" class="dash-mobile-nav d-lg-none px-3 px-sm-4 mb-4" style="display: none;">
+        <nav class="card p-3 shadow-sm border">
+          <a href="#overview" data-t="overview" class="on">📊 Overview</a>
+          <a href="#requirements" data-t="requirements">📝 Event Brief</a>
+          <a href="#vendors" data-t="vendors">🤝 Vendors & Suppliers</a>
+          <a href="#rsvp" data-t="rsvp">🎟️ RSVP & Headcount</a>
+          <a href="#checklist" data-t="checklist">✅ Event Checklist</a>
+          <a href="#budget" data-t="budget">💰 Budget & Expenses</a>
+          <a href="#bookings" data-t="bookings">📅 Booking History</a>
+          <a href="#notifications" data-t="notifications">🔔 Notifications</a>
+          <a href="#profile" data-t="profile">👤 Organization Profile</a>
+        </nav>
+      </div>
+
+      <div class="px-3 px-lg-4 pb-4">
+        <!-- Dashboard Hero Banner with Unique Realistic Image -->
+      <div class="dash-hero card mb-4 p-4 p-lg-5 text-white position-relative overflow-hidden border-0 shadow-sm cover-page-hero" style="min-height: 210px;">
+        <div class="cover-page-bg" style="background-image: url('assets/img/hero-dashboard.jpg');"></div>
+        <div class="cover-page-overlay"></div>
+        <div class="position-relative z-2 d-flex justify-content-between align-items-center flex-wrap gap-3">
+          <div>
+            <span class="badge badge-gold mb-2">Corporate Production Suite</span>
+            <h1 class="h3 font-serif mb-1 text-white" style="text-shadow: 0 2px 10px rgba(0,0,0,0.8);">Client Event Planning Dashboard</h1>
+            <p class="text-white small mb-0" style="text-shadow: 0 1px 4px rgba(0,0,0,0.8);">TechSphere Global · Annual Gala & Holiday Celebration 2026 · Target Date: Dec 18, 2026</p>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <a href="contact.html" class="btn btn-sm btn-gold">Contact Producer</a>
+            <a href="index.html" class="btn btn-sm btn-outline-light">Return to Site</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANE 1: OVERVIEW -->
+      <section class="pane on" id="p-overview">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+          <div>
+            <h2 class="h4 font-serif mb-1">Celebration Planning Command Center</h2>
+            <p class="text-muted small mb-0">Real-time RSVP headcount, supplier contracts, and budget allocations.</p>
+          </div>
+          <span class="badge badge-gold">Active Production Status: On Track</span>
+        </div>
+
+        <!-- Metric Stat Cards -->
+        <div class="row g-3 mb-4">
+          <div class="col-6 col-md-3">
+            <div class="stat">
+              <div class="num" id="eventDays">63</div>
+              <div class="fw-semibold small">Days to Celebration</div>
+              <small class="text-muted">Floor load-in begins 9:00 AM</small>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="stat">
+              <div class="num" id="ovp">50%</div>
+              <div class="fw-semibold small">Checklist Progress</div>
+              <small class="text-muted">3 of 6 milestone tasks done</small>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="stat">
+              <div class="num text-success" id="ovr">184</div>
+              <div class="fw-semibold small">RSVPs Confirmed</div>
+              <small class="text-muted">74% capacity locked</small>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="stat">
+              <div class="num text-warning" id="ovb">₹6,30,000</div>
+              <div class="fw-semibold small">Total Expenses</div>
+              <small class="text-muted">Under allocated budget</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Overall Progress Bar Card -->
+        <div class="card p-4 mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="mb-0">Overall Production Milestone Readiness</h6>
+            <span class="small fw-bold text-warning" id="ovp-label">Live Milestone Tracker</span>
+          </div>
+          <div class="prog mb-2">
+            <i id="bar" style="width: 50%;"></i>
+          </div>
+          <div class="d-flex justify-content-between small text-muted">
+            <span>Concept & Venue Secured</span>
+            <span>Catering & AV Locked</span>
+            <span>RSVP Invitations Active</span>
+            <span>Day-Of Ready</span>
+          </div>
+        </div>
+
+        <!-- Quick Summary Columns -->
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <div class="card p-4 h-100">
+              <h5 class="font-serif mb-3">Priority Action Items</h5>
+              <ul class="list-group list-group-flush small">
+                <li class="list-group-item bg-transparent d-flex justify-content-between align-items-center px-0">
+                  <span>Send final guest dietary list to executive chef</span>
+                  <span class="badge bg-danger-subtle text-danger">Due in 5 Days</span>
+                </li>
+                <li class="list-group-item bg-transparent d-flex justify-content-between align-items-center px-0">
+                  <span>Review acoustic test video from Live Band</span>
+                  <span class="badge bg-warning-subtle text-warning">Pending Review</span>
+                </li>
+                <li class="list-group-item bg-transparent d-flex justify-content-between align-items-center px-0">
+                  <span>Approve gold crystal trophy engraving proofs</span>
+                  <span class="badge bg-warning-subtle text-warning">Pending Review</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="card p-4 h-100">
+              <h5 class="font-serif mb-3">Assigned Lead Producer</h5>
+              <div class="d-flex gap-3 align-items-center mb-3">
+                <img src="assets/img/team-1.jpg" alt="Anita Rao" class="rounded-circle" width="60" height="60" style="object-fit:cover;">
+                <div>
+                  <h6 class="mb-0">Anita Rao</h6>
+                  <small class="text-muted">Managing Director & Principal Producer</small>
+                  <div class="small text-warning">Direct Line: +91 98765 43210</div>
+                </div>
+              </div>
+              <p class="small text-muted mb-0">
+                “Your floor plan and sound design tests at Grand Hyatt have been approved. We are ready to open table seating assignments.”
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-3 bg-light rounded-3 text-muted small mt-4">
+          ℹ️ <strong>Demo Persistence Notice:</strong> All checklist checks, RSVP count increments, vendor status updates, and budget calculations persist locally in your browser’s localStorage. Real vendor bookings, automated emails, and multi-user sync require backend database integration.
+        </div>
+      </section>
+
+      <!-- PANE 2: REQUIREMENTS BRIEF -->
+      <section class="pane" id="p-requirements">
+        <h2 class="h3 font-serif mb-3">Event Brief & Requirements</h2>
+        <p class="text-muted small mb-4">Update your core event specs. Changes save immediately to your local state.</p>
+
+        <form id="requirementsForm" data-validate novalidate data-msg="Event requirements updated and saved to your client dashboard!" class="card p-4 shadow-sm">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold" for="rt">Celebration Format <span class="text-danger">*</span></label>
+              <input id="rt" class="form-control" data-rule="req" placeholder="E.g. Corporate Holiday Gala" value="Corporate Holiday Gala" required>
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold" for="rd">Event Date <span class="text-danger">*</span></label>
+              <input id="rd" type="date" class="form-control" data-rule="futuredate" value="2026-12-18" required>
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold" for="rv">Venue Preference <span class="text-danger">*</span></label>
+              <input id="rv" class="form-control" data-rule="req" placeholder="E.g. 5-Star Hotel Ballroom" value="Grand Hyatt Ballroom & Terrace" required>
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label small fw-semibold" for="rb">Allocated Budget (₹) <span class="text-danger">*</span></label>
+              <input id="rb" type="number" class="form-control" data-rule="num" value="740000" required>
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label small fw-semibold" for="rg">Target Guest Count <span class="text-danger">*</span></label>
+              <input id="rg" type="number" class="form-control" data-rule="num" value="250" required>
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-12 mt-4">
+              <button type="submit" class="btn btn-gold">Save Event Requirements</button>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <!-- PANE 3: VENDORS -->
+      <section class="pane" id="p-vendors">
+        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+          <div>
+            <h2 class="h3 font-serif mb-1">Vendor Booking Status Tracker</h2>
+            <p class="text-muted small mb-0">Review vetted suppliers, contractual statuses, and direct production contacts.</p>
+          </div>
+          <span class="small text-muted">Update status directly in the table below</span>
+        </div>
+
+        <div class="card p-3 shadow-sm">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0" id="vt">
+              <!-- Populated by dashboard.js -->
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- PANE 4: RSVP -->
+      <section class="pane" id="p-rsvp">
+        <h2 class="h3 font-serif mb-1">RSVP Headcount Tracker</h2>
+        <p class="text-muted small mb-4">Monitor real-time employee registrations and adjust guest counters.</p>
+
+        <div class="row g-3 mb-4" id="rs">
+          <!-- Populated by dashboard.js -->
+        </div>
+
+        <div class="card p-4">
+          <h5 class="font-serif mb-3">Live Dietary & Transport Summary</h5>
+          <div class="row g-3 text-center">
+            <div class="col-sm-3 col-6">
+              <div class="p-3 border rounded-3">
+                <div class="fs-4 fw-bold">112</div>
+                <div class="small text-muted">Standard Gourmet</div>
+              </div>
+            </div>
+            <div class="col-sm-3 col-6">
+              <div class="p-3 border rounded-3">
+                <div class="fs-4 fw-bold">48</div>
+                <div class="small text-muted">Vegetarian / Jain</div>
+              </div>
+            </div>
+            <div class="col-sm-3 col-6">
+              <div class="p-3 border rounded-3">
+                <div class="fs-4 fw-bold">14</div>
+                <div class="small text-muted">Vegan / Gluten-Free</div>
+              </div>
+            </div>
+            <div class="col-sm-3 col-6">
+              <div class="p-3 border rounded-3">
+                <div class="fs-4 fw-bold">65</div>
+                <div class="small text-muted">Valet / Transport Required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PANE 5: CHECKLIST -->
+      <section class="pane" id="p-checklist">
+        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+          <div>
+            <h2 class="h3 font-serif mb-1">Event Planning Checklist</h2>
+            <p class="text-muted small mb-0">Check off completed items to advance your readiness progress bar.</p>
+          </div>
+        </div>
+
+        <div class="card p-4 shadow-sm mb-4">
+          <!-- Add Task Input -->
+          <div class="input-group mb-4">
+            <input type="text" id="newTaskInput" class="form-control" placeholder="Add a new custom planning task...">
+            <button class="btn btn-gold" id="addTaskBtn" type="button">Add Task</button>
+          </div>
+
+          <ul class="list-group list-group-flush" id="cl">
+            <!-- Populated by dashboard.js -->
+          </ul>
+        </div>
+      </section>
+
+      <!-- PANE 6: BUDGET -->
+      <section class="pane" id="p-budget">
+        <h2 class="h3 font-serif mb-1">Budget Breakdown & Expense Tracking</h2>
+        <p class="text-muted small mb-4">Line-item financial transparency with real-time variance calculations.</p>
+
+        <div class="card p-3 shadow-sm mb-4">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0" id="bt">
+              <!-- Populated by dashboard.js -->
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- PANE 7: BOOKING HISTORY -->
+      <section class="pane" id="p-bookings">
+        <h2 class="h3 font-serif mb-1">Event Booking History & Contracts</h2>
+        <p class="text-muted small mb-4">Archived records of past corporate celebrations and upcoming confirmed reservations.</p>
+
+        <div class="card p-3 shadow-sm">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>Event Name</th>
+                  <th>Celebration Date</th>
+                  <th>Venue</th>
+                  <th>Attendees</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="fw-semibold">Annual Gala & Holiday Celebration 2026</td>
+                  <td>18 Dec 2026</td>
+                  <td>Grand Hyatt Ballroom</td>
+                  <td>250 Guests</td>
+                  <td><span class="badge bg-success-subtle text-success">Active Production</span></td>
+                </tr>
+                <tr>
+                  <td class="fw-semibold">Mid-Year Innovation Summit Dinner</td>
+                  <td>14 Jul 2026</td>
+                  <td>St. Regis Skyline Lounge</td>
+                  <td>120 Guests</td>
+                  <td><span class="badge bg-secondary-subtle text-secondary">Completed</span></td>
+                </tr>
+                <tr>
+                  <td class="fw-semibold">Annual Corporate Holiday Party 2025</td>
+                  <td>12 Dec 2025</td>
+                  <td>Taj Lands End Ballroom</td>
+                  <td>210 Guests</td>
+                  <td><span class="badge bg-secondary-subtle text-secondary">Completed</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- PANE 8: NOTIFICATIONS -->
+      <section class="pane" id="p-notifications">
+        <h2 class="h3 font-serif mb-1">Production Alerts & Notifications</h2>
+        <p class="text-muted small mb-4">Live updates from your lead producer and automated calendar alerts.</p>
+
+        <div class="card p-3 shadow-sm">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex gap-3 align-items-start py-3 bg-transparent">
+              <span class="fs-4">📢</span>
+              <div class="flex-grow-1">
+                <strong>Venue Floor Plan Approved</strong>
+                <p class="small text-muted mb-0">Grand Hyatt banqueting team has signed off on the 25-table layout and DJ riser positioning.</p>
+                <small class="text-muted">Today at 9:30 AM</small>
+              </div>
+            </li>
+            <li class="list-group-item d-flex gap-3 align-items-start py-3 bg-transparent">
+              <span class="fs-4">🎟️</span>
+              <div class="flex-grow-1">
+                <strong>18 New RSVPs Received</strong>
+                <p class="small text-muted mb-0">Engineering and Product departments completed their digital registration confirmations.</p>
+                <small class="text-muted">Yesterday at 4:15 PM</small>
+              </div>
+            </li>
+            <li class="list-group-item d-flex gap-3 align-items-start py-3 bg-transparent">
+              <span class="fs-4">💳</span>
+              <div class="flex-grow-1">
+                <strong>Catering Deposit Reconciled</strong>
+                <p class="small text-muted mb-0">Second milestone advance for Saffron & Truffle Gourmet Catering has been logged.</p>
+                <small class="text-muted">Oct 10, 2026</small>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- PANE 9: PROFILE -->
+      <section class="pane" id="p-profile">
+        <h2 class="h3 font-serif mb-1">Corporate Client Profile</h2>
+        <p class="text-muted small mb-4">Maintain primary billing, organization credentials, and liaison contacts.</p>
+
+        <form id="profileForm" data-validate novalidate data-msg="Corporate profile details saved to your browser session!" class="card p-4 shadow-sm">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold" for="pn">Primary Liaison Name <span class="text-danger">*</span></label>
+              <input id="pn" class="form-control" data-rule="name" value="Priya Sharma" pattern="^[A-Za-z\s.'-]{2,}$" title="Name must contain letters, spaces, hyphens, or apostrophes only (no numbers)." required>
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold" for="pc">Company / Enterprise Name <span class="text-danger">*</span></label>
+              <input id="pc" class="form-control" data-rule="req" value="TechSphere Global Innovations Ltd." required>
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold" for="pe">Work Email <span class="text-danger">*</span></label>
+              <input id="pe" type="email" class="form-control" data-rule="email" value="p.sharma@techsphere.example" required>
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold" for="pp">Emergency Contact Phone <span class="text-danger">*</span></label>
+              <input id="pp" type="tel" class="form-control" data-rule="phone" value="9876543210" required>
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-12 mt-4">
+              <button type="submit" class="btn btn-gold">Save Profile Changes</button>
+            </div>
+        </div>
+      </section>
+
+      </div><!-- /.px-3.px-lg-4.pb-4 -->
+
+    </main>
+  </div>
+
+  <!-- Logout Confirmation Modal -->
+  <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-bottom border-secondary border-opacity-25">
+          <h5 class="modal-title font-serif" id="logoutModalLabel">Confirm Portal Logout</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body py-4">
+          <p class="mb-1">Are you sure you want to sign out of the <strong>TechSphere Global</strong> event planning portal?</p>
+          <small class="text-muted">Your active event changes and checklist progress will remain safely synced in your browser session.</small>
+        </div>
+        <div class="modal-footer border-top border-secondary border-opacity-25">
+          <button type="button" class="btn btn-ghost" data-bs-dismiss="modal">Cancel</button>
+          <a href="login.html" id="btnConfirmLogout" class="btn btn-danger">Yes, Sign Out</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/validation.js"></script>
+  <script src="assets/js/dashboard.js"></script>
+</body>
+</html>
