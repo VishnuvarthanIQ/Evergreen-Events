@@ -1444,6 +1444,234 @@ textarea:focus:not(:focus-visible) {
   border-color: var(--gold) !important;
 }
 
+/* Production Process Step Cards - Exact Horizontal & Baseline Alignment */
+.blueprint-card {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 2.25rem 1.25rem 1.5rem !important;
+  border-radius: 1.25rem !important;
+  background-color: var(--card) !important;
+  border: 1px solid var(--bd) !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.3s ease !important;
+  position: relative;
+  text-align: center;
+}
+
+.blueprint-card:hover {
+  transform: translateY(-8px) !important;
+  border-color: var(--gold) !important;
+  box-shadow: 0 16px 36px -8px rgba(196, 154, 36, 0.28), 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-bs-theme="dark"] .blueprint-card:hover {
+  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.7), 0 0 20px rgba(217, 182, 93, 0.25) !important;
+}
+
+/* Attractive Floating Luxury Icon Badge - Ultra High Contrast & Visibility */
+.blueprint-icon-wrap {
+  width: 76px;
+  height: 76px;
+  margin: 0.25rem auto 1.25rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #FFF9ED 0%, #F5E7C4 100%);
+  border: 2px solid var(--gold);
+  box-shadow: 0 8px 24px -4px rgba(196, 154, 36, 0.32), inset 0 2px 4px rgba(255, 255, 255, 0.9);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.4s ease, 
+              border-color 0.3s ease, 
+              background 0.3s ease;
+  user-select: none;
+  flex-shrink: 0;
+  position: relative;
+}
+
+[data-bs-theme="dark"] .blueprint-icon-wrap {
+  background: radial-gradient(circle at 50% 40%, rgba(217, 182, 93, 0.28) 0%, rgba(21, 34, 56, 0.95) 75%);
+  border: 2px solid #D9B65D;
+  box-shadow: 0 0 22px rgba(217, 182, 93, 0.32), 0 8px 24px -4px rgba(0, 0, 0, 0.7), inset 0 1px 2px rgba(255, 255, 255, 0.18);
+}
+
+.blueprint-card:hover .blueprint-icon-wrap {
+  transform: scale(1.12) translateY(-3px);
+  background: linear-gradient(145deg, #FFF3D6 0%, #ECCE8B 100%);
+  border-color: var(--gold-hover);
+  box-shadow: 0 12px 32px -2px rgba(196, 154, 36, 0.48), 0 0 20px rgba(217, 182, 93, 0.4);
+}
+
+[data-bs-theme="dark"] .blueprint-card:hover .blueprint-icon-wrap {
+  background: radial-gradient(circle at 50% 40%, rgba(217, 182, 93, 0.4) 0%, rgba(25, 41, 68, 0.98) 75%);
+  border-color: #E7CA7B;
+  box-shadow: 0 12px 32px -2px rgba(0, 0, 0, 0.8), 0 0 24px rgba(217, 182, 93, 0.45);
+}
+
+.blueprint-icon-wrap .blueprint-icon-svg {
+  display: block;
+  width: 44px;
+  height: 44px;
+  transform-origin: center center;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.16));
+}
+
+.blueprint-card:hover .blueprint-icon-svg {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* ==========================================================================
+   Step Card SVG Theme Adaptability (Light & Dark Mode Crystal-Clear Contrast)
+   ========================================================================== */
+/* Champagne Flutes */
+.step-flute-outline,
+.step-flute-stem {
+  stroke: #0F172A;
+  transition: stroke 0.3s ease;
+}
+.step-flute-base {
+  fill: #CBD5E1;
+  stroke: #0F172A;
+  transition: fill 0.3s ease, stroke 0.3s ease;
+}
+.step-flute-sparkle {
+  fill: #D97706;
+  transition: fill 0.3s ease;
+}
+
+/* Clapperboard */
+.step-board-body,
+.step-board-arm {
+  fill: #0F172A;
+  stroke: #020617;
+  transition: fill 0.3s ease, stroke 0.3s ease;
+}
+.step-board-lines {
+  stroke: #94A3B8;
+  transition: stroke 0.3s ease;
+}
+
+/* Compass */
+.step-comp-dial {
+  fill: #FFFFFF;
+  transition: fill 0.3s ease, stroke 0.3s ease;
+}
+.step-comp-ticks {
+  stroke: #0F172A;
+  transition: stroke 0.3s ease;
+}
+
+/* Palette */
+.step-pal-border {
+  stroke: #78350F;
+  transition: stroke 0.3s ease;
+}
+.step-pal-hole {
+  fill: #FFFFFF;
+  stroke: #78350F;
+  transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+/* 🌙 Dark Mode High-Contrast Overrides */
+[data-bs-theme="dark"] .step-flute-outline,
+[data-bs-theme="dark"] .step-flute-stem {
+  stroke: #F8FAFC !important;
+}
+[data-bs-theme="dark"] .step-flute-base {
+  fill: #1E293B !important;
+  stroke: #F8FAFC !important;
+}
+[data-bs-theme="dark"] .step-flute-sparkle {
+  fill: #FDE68A !important;
+}
+
+[data-bs-theme="dark"] .step-board-body,
+[data-bs-theme="dark"] .step-board-arm {
+  fill: #1E293B !important;
+  stroke: #94A3B8 !important;
+}
+[data-bs-theme="dark"] .step-board-lines {
+  stroke: #CBD5E1 !important;
+}
+
+[data-bs-theme="dark"] .step-comp-dial {
+  fill: #101B2B !important;
+  stroke: #D9B65D !important;
+}
+[data-bs-theme="dark"] .step-comp-ticks {
+  stroke: #F8FAFC !important;
+}
+
+[data-bs-theme="dark"] .step-pal-border {
+  stroke: #D9B65D !important;
+}
+[data-bs-theme="dark"] .step-pal-hole {
+  fill: #152238 !important;
+  stroke: #D9B65D !important;
+}
+
+.blueprint-icon-wrap .blueprint-emoji {
+  font-size: 2.15rem;
+  line-height: 1;
+  display: inline-block;
+  transform-origin: center center;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.15));
+}
+
+.blueprint-card:hover .blueprint-emoji {
+  transform: scale(1.1) rotate(6deg);
+}
+
+/* Strict Uniform Title Height & Alignment across all 4 cards */
+.blueprint-title {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.35;
+  min-height: 3.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.85rem;
+  color: var(--ink);
+  text-align: center;
+}
+
+/* Uniform Description Body */
+.blueprint-desc {
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+/* Uniform Deliverable Baseline & Border Divider */
+.blueprint-deliverable {
+  margin-top: auto;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--bd);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--muted);
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.blueprint-deliverable strong {
+  color: var(--ink);
+  margin-inline-end: 0.25rem;
+}
+
 .card-img-top {
   height: 220px;
   object-fit: cover;
