@@ -22,12 +22,6 @@
     <div class="d-flex align-items-center gap-2 ms-auto">
       <button class="btn btn-sm btn-ghost" data-theme-toggle title="Toggle Dark/Light Mode" aria-label="Toggle theme">◐</button>
       <button class="btn btn-sm btn-ghost" data-dir-toggle title="Toggle RTL/LTR Layout" aria-label="Toggle text direction">⇄</button>
-      <a class="btn btn-sm btn-ghost auth-signin-btn" href="login.html">Sign In</a>
-      <div class="auth-user-slot d-none align-items-center gap-2">
-        <span class="auth-username small fw-semibold text-truncate" style="max-width: 140px;"></span>
-        <span class="opacity-25">|</span>
-        <button type="button" class="btn btn-sm btn-ghost auth-logout-btn p-0 border-0 fw-semibold text-danger">Logout</button>
-      </div>
     </div>
   </header>
 
@@ -55,11 +49,6 @@
             <div id="logoutNotice" class="alert alert-success d-none mb-3 py-2 small d-flex align-items-center gap-2" role="alert">
               <span>✓</span>
               <span>You have been safely signed out of your client planning portal.</span>
-            </div>
-
-            <!-- Demo Credentials Pill Notice -->
-            <div id="demoCredsBtn" class="p-2 mb-3 bg-light border rounded small text-muted text-center" style="cursor: pointer;" title="Click to auto-fill demo credentials">
-              🔑 Demo Access: <strong>client@techsphere.com</strong> / <strong>Corporate2026!</strong>
             </div>
 
             <form data-validate novalidate data-action="login">
@@ -183,16 +172,6 @@
         window.dispatchEvent(new CustomEvent('authChange', { detail: guestUser }));
 
         window.popup('Guest Access', 'Signed in as Guest! Welcome to Evergreen Events.', true);
-      });
-    }
-
-    var demoBtn = document.getElementById('demoCredsBtn');
-    if (demoBtn) {
-      demoBtn.addEventListener('click', function() {
-        var emailInput = document.getElementById('loginEmail');
-        var passInput = document.getElementById('loginPass');
-        if (emailInput) emailInput.value = 'client@techsphere.com';
-        if (passInput) passInput.value = 'Corporate2026!';
       });
     }
 
