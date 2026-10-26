@@ -233,4 +233,79 @@
     }
     update();
   };
+
+  // Centralized Header Authentication State Controller
+  function getLoggedInUser() {
+    try {
+      var stored = localStorage.getItem('eg_logged_user') || sessionStorage.getItem('eg_current_user');
+      if (stored) {
+        var parsed = JSON.parse(stored);
+        if (parsed && (parsed.name || parsed.email)) return parsed;
+      }
+    } catch (e) {}
+    return null;
+  }
+
+  window.updateAuthHeader = function() {
+    var user = getLoggedInUser();
+    var signinBtns = document.querySelectorAll('.auth-signin-btn');
+    var userSlots = document.querySelectorAll('.auth-user-slot');
+    var usernameEls = document.querySelectorAll('.auth-username');
+
+    if (user) {
+      var displayName = user.name || user.email || 'Client';
+      usernameEls.forEach(function(el) {
+        el.textContent = displayName;
+        el.title = displayName;
+      });
+      signinBtns.forEach(function(btn) {
+        btn.classList.add('d-none');
+      });
+      userSlots.forEach(function(slot) {
+        slot.classList.remove('d-none');
+        slot.classList.add('d-inline-flex');
+      });
+    } else {
+      signinBtns.forEach(function(btn) {
+        btn.classList.remove('d-none');
+      });
+      userSlots.forEach(function(slot) {
+        slot.classList.add('d-none');
+        slot.classList.remove('d-inline-flex');
+      });
+      usernameEls.forEach(function(el) {
+        el.textContent = '';
+      });
+    }
+  };
+
+  window.handleLogout = function(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    try {
+      localStorage.removeItem('eg_logged_user');
+      sessionStorage.removeItem('eg_current_user');
+    } catch (err) {}
+
+    window.updateAuthHeader();
+    window.dispatchEvent(new CustomEvent('authChange'));
+
+    if (typeof window.popup === 'function') {
+      window.popup('Logged Out', 'You have logged out successfully!', true);
+    } else {
+      alert('You have logged out successfully!');
+    }
+  };
+
+  document.addEventListener('click', function(e) {
+    if (e.target && (e.target.matches('.auth-logout-btn') || e.target.closest('.auth-logout-btn'))) {
+      window.handleLogout(e);
+    }
+  });
+
+  // Initialize Header Auth State
+  window.updateAuthHeader();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', window.updateAuthHeader);
+  }
+
 })();

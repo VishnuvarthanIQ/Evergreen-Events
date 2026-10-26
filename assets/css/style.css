@@ -1448,7 +1448,7 @@ textarea:focus:not(:focus-visible) {
 .blueprint-card {
   display: flex !important;
   flex-direction: column !important;
-  padding: 2.25rem 1.25rem 1.5rem !important;
+  padding: 2.25rem 1rem 1.5rem !important;
   border-radius: 1.25rem !important;
   background-color: var(--card) !important;
   border: 1px solid var(--bd) !important;
@@ -1657,13 +1657,19 @@ textarea:focus:not(:focus-visible) {
   margin-top: auto;
   padding-top: 0.85rem;
   border-top: 1px solid var(--bd);
-  font-size: 0.82rem;
+  font-size: 0.81rem;
   line-height: 1.45;
   color: var(--muted);
   min-height: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+}
+
+.blueprint-deliverable-text {
+  display: block;
+  width: 100%;
   text-align: center;
 }
 
@@ -1811,8 +1817,11 @@ textarea:focus:not(:focus-visible) {
 
 .stat .num {
   font-size: clamp(1.2rem, 2.2vw, 1.95rem);
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-weight: 800;
+  letter-spacing: -0.03em;
   color: var(--gold);
   line-height: 1.15;
   margin-bottom: 0.4rem;
@@ -2162,9 +2171,9 @@ textarea:focus:not(:focus-visible) {
   background-color: var(--header-bg) !important;
   border-bottom: 1px solid var(--header-border) !important;
   box-shadow: 0 2px 14px rgba(0, 0, 0, 0.08) !important;
-  padding: 0.85rem 1.5rem;
+  padding: 0.75rem 1.5rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   z-index: 1040 !important;
   transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
@@ -2172,6 +2181,34 @@ textarea:focus:not(:focus-visible) {
 
 .auth-topbar .brand {
   color: var(--header-ink) !important;
+}
+
+/* In-form centered brand logo & title for Auth pages */
+.auth-brand-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  text-decoration: none !important;
+  color: var(--ink);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.auth-brand-link:hover .site-logo {
+  transform: scale(1.08) rotate(3deg);
+  filter: drop-shadow(0 4px 12px rgba(197, 155, 39, 0.45));
+}
+
+.auth-brand-link .brand {
+  color: var(--ink);
+  font-size: 1.45rem;
+  line-height: 1.2;
+  margin: 0;
+  transition: color 0.25s ease;
+}
+
+.auth-brand-link:hover .brand {
+  color: var(--gold);
 }
 
 /* Minimal Auth Footer */
@@ -2774,11 +2811,14 @@ body.d-flex.flex-column.min-vh-100 > footer {
     font-size: 1.15rem !important;
   }
   /* Row 2: Login and Sign Up together in a second horizontal row */
-  .nav-actions a[href="login.html"] {
-    grid-column: 1 !important;
+  .nav-actions a[href="login.html"],
+  .nav-actions .auth-signin-btn,
+  .nav-actions .auth-user-slot {
+    grid-column: 1 / -1 !important;
     grid-row: 2 !important;
     width: 100% !important;
     height: 40px !important;
+    justify-content: center !important;
   }
   .nav-actions a[href="register.html"] {
     grid-column: 2 !important;
@@ -2870,39 +2910,83 @@ body.d-flex.flex-column.min-vh-100 > footer {
   }
 }
 
-/* Medium Desktop & Tablet Landscape (992px to 1199.98px, including 1024px) */
+/* Medium Desktop & Tablet Landscape (992px to 1199.98px, specifically 1024px) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .site-header .container {
     max-width: 100% !important;
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+  .site-header .navbar {
+    padding: 0.55rem 0 !important;
   }
   .site-header .navbar-brand {
-    font-size: 1.05rem;
-    gap: 0.45rem;
-    margin-right: 0.5rem;
+    font-size: 0.98rem !important;
+    gap: 0.35rem !important;
+    margin-right: 0.35rem !important;
+    flex-shrink: 0 !important;
   }
   .site-header .navbar-brand .brand {
-    font-size: 1.05rem;
+    font-size: 0.98rem !important;
+    white-space: nowrap !important;
+  }
+  .site-header .navbar-nav {
+    margin: 0 auto !important;
+    gap: 0.1rem !important;
   }
   .site-header .nav-link {
-    padding: 0.45rem 0.5rem !important;
-    font-size: 0.88rem !important;
+    padding: 0.35rem 0.38rem !important;
+    font-size: 0.8rem !important;
+    white-space: nowrap !important;
   }
   .site-header .nav-actions {
-    gap: 0.35rem !important;
+    gap: 0.3rem !important;
+    flex-wrap: nowrap !important;
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    display: flex !important;
+    align-items: center !important;
   }
   .site-header .nav-actions .btn {
-    padding: 0.38rem 0.6rem !important;
-    font-size: 0.82rem !important;
-    height: 34px !important;
+    padding: 0 0.65rem !important;
+    font-size: 0.78rem !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+  }
+  .site-header .nav-actions .auth-user-slot {
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
+    padding: 0 0.55rem !important;
+    font-size: 0.78rem !important;
+    gap: 0.35rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+  }
+  .site-header .nav-actions .auth-user-slot .auth-username {
+    max-width: 95px !important;
+    font-size: 0.78rem !important;
+  }
+  .site-header .nav-actions .auth-user-slot .auth-logout-btn {
+    font-size: 0.76rem !important;
   }
   .site-header .nav-actions [data-theme-toggle],
   .site-header .nav-actions [data-dir-toggle] {
-    width: 34px !important;
-    min-width: 34px !important;
-    height: 34px !important;
-    font-size: 0.95rem !important;
+    width: 32px !important;
+    min-width: 32px !important;
+    height: 32px !important;
+    font-size: 0.85rem !important;
   }
 }
 
@@ -3007,5 +3091,595 @@ body.d-flex.flex-column.min-vh-100 > footer {
   .site-logo {
     transition: none !important;
     transform: none !important;
+  }
+}
+
+/* Footer Direct Contact Links with Icons */
+.footer-contact-link {
+  color: inherit !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.35rem;
+  transition: color 0.2s ease !important;
+}
+
+.footer-contact-link:hover {
+  color: var(--gold) !important;
+  transform: none !important;
+}
+
+.footer-contact-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  vertical-align: -1px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.85;
+}
+
+/* ==========================================================================
+   Professional Pricing & Number Typography Engine
+   Precision alignment, zero-wrap, tabular numeric figures across 320px, 768px, 1024px & Desktop
+   ========================================================================== */
+.price.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.price-badge-row {
+  min-height: 28px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.price-title {
+  font-size: 1.5rem;
+  line-height: 1.25;
+  min-height: 2.4rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.35rem;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+}
+
+.price-desc {
+  min-height: 2.85rem;
+  display: flex;
+  align-items: flex-start;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.price-amount-box {
+  min-height: 4.85rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 0.75rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+/* Professional Numeric Typography */
+.price-val,
+.price .display-5,
+.price .display-6 {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif !important;
+  font-weight: 800 !important;
+  font-size: clamp(1.85rem, 2.4vw, 2.5rem) !important;
+  color: var(--gold) !important;
+  letter-spacing: -0.035em !important;
+  line-height: 1.15 !important;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  display: inline-flex !important;
+  align-items: baseline !important;
+  justify-content: flex-start !important;
+  font-feature-settings: "tnum" 1, "lnum" 1, "cv05" 1, "cv11" 1 !important;
+  font-variant-numeric: tabular-nums lining-nums !important;
+  margin-bottom: 0.2rem !important;
+}
+
+.price-currency {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 0.72em !important;
+  font-weight: 700 !important;
+  margin-inline-end: 2px !important;
+  vertical-align: baseline !important;
+  opacity: 0.95;
+  letter-spacing: normal !important;
+}
+
+.price-num {
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  letter-spacing: inherit !important;
+  white-space: nowrap !important;
+}
+
+.price-period {
+  font-size: 0.825rem;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+/* --- Breakpoint: Ultra-compact Mobile (320px - 375px) --- */
+@media (max-width: 375.98px) {
+  .price.card {
+    padding: 1.25rem 0.95rem !important;
+  }
+  .price-title {
+    font-size: 1.28rem !important;
+    min-height: auto !important;
+  }
+  .price-desc {
+    min-height: auto !important;
+    font-size: 0.82rem !important;
+    margin-bottom: 0.4rem !important;
+  }
+  .price-amount-box {
+    min-height: auto !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .price-val,
+  .price .display-5,
+  .price .display-6 {
+    font-size: 1.7rem !important;
+  }
+  .price-badge-row .badge {
+    font-size: 0.7rem !important;
+    padding: 0.25rem 0.45rem !important;
+  }
+  .price ul li {
+    font-size: 0.82rem !important;
+    padding-top: 0.4rem !important;
+    padding-bottom: 0.4rem !important;
+  }
+}
+
+/* --- Breakpoint: Mobile Standard (376px - 767.98px) --- */
+@media (min-width: 376px) and (max-width: 767.98px) {
+  .price.card {
+    padding: 1.65rem 1.25rem !important;
+  }
+  .price-title {
+    font-size: 1.45rem !important;
+    min-height: auto !important;
+  }
+  .price-desc {
+    min-height: auto !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .price-amount-box {
+    min-height: auto !important;
+  }
+  .price-val,
+  .price .display-5,
+  .price .display-6 {
+    font-size: 2.1rem !important;
+  }
+}
+
+/* --- Breakpoint: Tablet (768px - 991.98px, exactly 768px in 3 cols) --- */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .price.card {
+    padding: 1.35rem 0.8rem !important;
+  }
+  .price-title {
+    font-size: 1.15rem !important;
+    min-height: 2.9rem !important;
+    display: flex;
+    align-items: center;
+  }
+  .price-desc {
+    font-size: 0.78rem !important;
+    min-height: 3.35rem !important;
+    line-height: 1.4 !important;
+  }
+  .price-amount-box {
+    min-height: 4.2rem !important;
+  }
+  .price-val,
+  .price .display-5,
+  .price .display-6 {
+    font-size: 1.45rem !important;
+    letter-spacing: -0.03em !important;
+  }
+  .price-period {
+    font-size: 0.74rem !important;
+  }
+  .price-badge-row {
+    min-height: 26px !important;
+  }
+  .price-badge-row .badge {
+    font-size: 0.65rem !important;
+    padding: 0.2rem 0.4rem !important;
+  }
+  .price ul li {
+    font-size: 0.77rem !important;
+    padding-top: 0.4rem !important;
+    padding-bottom: 0.4rem !important;
+  }
+  .price .btn {
+    font-size: 0.78rem !important;
+    padding: 0.45rem 0.35rem !important;
+  }
+}
+
+/* --- Breakpoint: Laptop / iPad Pro Landscape (992px - 1199.98px, exactly 1024px) --- */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .price.card {
+    padding: 1.85rem 1.25rem !important; /* Overrides p-lg-5 to ensure 264px inner room */
+  }
+  .price-title {
+    font-size: 1.35rem !important;
+    min-height: 2.25rem !important;
+  }
+  .price-desc {
+    font-size: 0.85rem !important;
+    min-height: 2.9rem !important;
+  }
+  .price-val,
+  .price .display-5,
+  .price .display-6 {
+    font-size: 1.95rem !important;
+  }
+  .price-period {
+    font-size: 0.8rem !important;
+  }
+  .price-badge-row .badge {
+    font-size: 0.72rem !important;
+    padding: 0.25rem 0.5rem !important;
+  }
+  .price ul li {
+    font-size: 0.84rem !important;
+  }
+  .price .btn {
+    font-size: 0.875rem !important;
+    padding: 0.55rem 0.75rem !important;
+  }
+}
+
+/* --- Breakpoint: Desktop (≥ 1200px) --- */
+@media (min-width: 1200px) {
+  .price.card {
+    padding: 2.5rem 1.85rem !important;
+  }
+  .price-title {
+    font-size: 1.55rem !important;
+    min-height: 2.4rem !important;
+  }
+  .price-desc {
+    font-size: 0.875rem !important;
+    min-height: 2.85rem !important;
+  }
+  .price-val,
+  .price .display-5,
+  .price .display-6 {
+    font-size: 2.35rem !important;
+  }
+}
+
+.blog-card-title {
+  min-height: 3.15rem;
+  display: flex;
+  align-items: flex-start;
+}
+
+.blog-card-desc {
+  min-height: 4.5rem;
+}
+
+
+/* Auth Social Login Buttons (Google & Apple) */
+.auth-social-btn {
+  background-color: var(--card) !important;
+  border: 1px solid var(--bd) !important;
+  color: var(--ink) !important;
+  border-radius: 0.65rem !important;
+  transition: all 0.2s ease !important;
+  padding: 0.6rem 1rem !important;
+}
+
+.auth-social-btn:hover {
+  background-color: var(--card-hover) !important;
+  border-color: var(--gold) !important;
+  color: var(--gold) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Header Authentication State (Sign In / Username | Logout) */
+.site-header .nav-actions .btn.d-none,
+.site-header .nav-actions .auth-signin-btn.d-none,
+.site-header .nav-actions .auth-user-slot.d-none,
+.nav-actions .d-none {
+  display: none !important;
+}
+.auth-user-slot {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.45rem !important;
+  color: var(--ink) !important;
+  font-size: 0.85rem !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  max-height: 36px !important;
+  padding: 0 0.75rem !important;
+  background-color: var(--card) !important;
+  border: 1px solid var(--bd) !important;
+  border-radius: 0.5rem !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  box-sizing: border-box !important;
+  vertical-align: middle !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  transition: all 0.2s ease;
+}
+
+.auth-user-slot .auth-username {
+  color: var(--ink) !important;
+  max-width: 130px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  line-height: 1 !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+
+.auth-user-slot .auth-logout-btn {
+  color: #ef4444 !important;
+  font-size: 0.82rem !important;
+  text-decoration: none !important;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  vertical-align: middle !important;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.auth-user-slot .auth-logout-btn:hover {
+  color: #dc2626 !important;
+  text-decoration: underline !important;
+}
+
+/* Universal Badge text containment */
+.badge-gold-subtle {
+  white-space: normal !important;
+  display: inline-block !important;
+  max-width: 100% !important;
+  word-break: break-word !important;
+  line-height: 1.35 !important;
+}
+
+
+/* Guest Login Button */
+.auth-guest-btn {
+  background-color: var(--card) !important;
+  border: 1px dashed var(--gold) !important;
+  color: var(--ink) !important;
+  border-radius: 0.65rem !important;
+  transition: all 0.2s ease !important;
+}
+
+.auth-guest-btn:hover {
+  background-color: var(--card-hover) !important;
+  border-style: solid !important;
+  border-color: var(--gold) !important;
+  color: var(--gold) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(197, 155, 39, 0.15);
+}
+
+
+/* Universal Dashboard Responsive Layout Engine (360px, 768px, 1024px, Desktop) */
+.dash-topbar {
+  padding: 0.85rem 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.dash-topbar-content {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: nowrap !important;
+  gap: 0.75rem !important;
+}
+
+.dash-topbar-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+}
+
+.dash-topbar-controls {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.45rem !important;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+}
+
+.dash-topbar .btn-dash-user {
+  height: 38px !important;
+  padding: 0 0.65rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.4rem !important;
+  border-radius: 0.5rem !important;
+}
+
+/* Tablet (768px to 991.98px) Specific Alignment: Guarantees 1 Single Clean Row */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .dash-topbar {
+    padding: 0.75rem 1.25rem !important;
+  }
+  .dash-topbar-content {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+  }
+  .dash-topbar-left h1 {
+    font-size: 1.15rem !important;
+  }
+  .dash-topbar-controls {
+    gap: 0.35rem !important;
+  }
+  .dash-topbar .btn-dash-icon {
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+  }
+  .dash-topbar .btn-dash-user {
+    height: 36px !important;
+    padding: 0 0.55rem !important;
+  }
+  .dash-topbar .btn-dash-logout {
+    height: 36px !important;
+    padding: 0 0.75rem !important;
+    font-size: 0.85rem !important;
+  }
+}
+
+/* 1024px Laptop & Tablet Landscape (992px to 1199.98px): Single Clean Row without Horizontal Scroll */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .dash-topbar {
+    padding: 0.8rem 1.25rem !important;
+  }
+  .dash-topbar-content {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+  }
+  .dash-topbar-left h1 {
+    font-size: 1.18rem !important;
+  }
+  .dash-topbar-controls {
+    gap: 0.4rem !important;
+  }
+  .dash-topbar .btn-dash-icon {
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+  }
+  .dash-topbar .btn-dash-user {
+    height: 36px !important;
+    padding: 0 0.6rem !important;
+  }
+  .dash-topbar .btn-dash-logout {
+    height: 36px !important;
+    padding: 0 0.8rem !important;
+  }
+}
+
+/* Mobile Screens (< 768px): Structured 2-Line Edge-to-Edge Layout */
+@media (max-width: 767.98px) {
+  .dash-topbar {
+    padding: 0.75rem 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+  .dash-topbar-content {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.65rem !important;
+  }
+  .dash-topbar-left {
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+  .dash-topbar-left h1 {
+    font-size: 1.15rem !important;
+  }
+  .dash-topbar-controls {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 0.35rem !important;
+  }
+  .dash-topbar .btn-dash-icon {
+    width: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
+    height: 36px !important;
+  }
+  .dash-topbar .btn-dash-user {
+    height: 36px !important;
+    padding: 0 0.5rem !important;
+  }
+  .dash-topbar .btn-dash-logout {
+    height: 36px !important;
+    padding: 0 0.75rem !important;
+    flex-grow: 1 !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+  }
+  .dash-hero {
+    padding: 1.25rem 1rem !important;
+    min-height: auto !important;
+  }
+  .dash-hero h1 {
+    font-size: 1.35rem !important;
+  }
+}
+
+
+/* Mobile View Balanced Alignment for Hero Badge */
+.hero-badge .hero-badge-lead {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+@media (max-width: 575.98px) {
+  .hero-badge {
+    display: inline-flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    font-size: 0.81rem !important;
+    line-height: 1.35 !important;
+    padding: 0.5rem 1.25rem !important;
+    border-radius: 1.25rem !important;
+    max-width: 92% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    gap: 0.15rem !important;
+  }
+  .hero-badge .hero-badge-lead {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  .hero-badge .hero-badge-sub {
+    display: block !important;
+    text-align: center !important;
+    width: 100% !important;
   }
 }

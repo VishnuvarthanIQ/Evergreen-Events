@@ -51,21 +51,17 @@
     <main class="main p-0">
 
       <!-- Professional Top Dashboard Header (Clearly Visible in Light & Dark Mode) -->
-      <header class="dash-topbar border-0 border-bottom px-4 py-3 mb-4 sticky-top">
-        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-          <!-- Left: Title & Breadcrumb (Removed redundant '☰ Menu' button) -->
-          <div class="d-flex align-items-center gap-3">
-            <div>
-              <div class="d-flex align-items-center gap-2">
-                <h1 class="h5 mb-0 fw-bold font-serif text-current">Client Event Portal</h1>
-                <span class="badge badge-gold-subtle d-none d-sm-inline-block">TechSphere Global</span>
-              </div>
-              <small class="text-muted d-none d-md-block">Active Holiday Gala 2026 · Command Center</small>
-            </div>
+      <header class="dash-topbar border-0 border-bottom sticky-top">
+        <div class="dash-topbar-content d-flex align-items-center justify-content-between">
+          <!-- Left: Title & Organization Badge -->
+          <div class="dash-topbar-left d-flex align-items-center gap-2">
+            <h1 class="h5 mb-0 fw-bold font-serif text-current">Client Event Portal</h1>
+            <span class="badge badge-gold-subtle" id="dashHeaderOrgBadge">TechSphere Global</span>
+            <small class="text-muted d-none d-xl-inline-block ms-2 opacity-75">· Active Holiday Gala 2026</small>
           </div>
 
-          <!-- Right: Complete Set of Clearly Visible Controls (Aligned Horizontally) -->
-          <div class="d-flex align-items-center gap-2 flex-nowrap flex-shrink-0">
+          <!-- Right: Complete Set of Controls (Strictly 1 single line on 768px, 1024px & Desktop) -->
+          <div class="dash-topbar-controls d-flex align-items-center gap-2 flex-nowrap flex-shrink-0">
             <!-- Notifications Menu -->
             <div class="dropdown">
               <button class="btn btn-sm btn-ghost btn-dash-icon position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Recent Notifications" aria-label="Recent notifications">
@@ -108,15 +104,15 @@
 
             <!-- User Profile Dropdown -->
             <div class="dropdown">
-              <button class="btn btn-sm btn-ghost d-inline-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="User Account Menu">
-                <span class="avatar-badge bg-warning text-dark">PS</span>
-                <span class="d-none d-md-inline small fw-semibold">Priya S.</span>
+              <button class="btn btn-sm btn-ghost btn-dash-user d-inline-flex align-items-center justify-content-center gap-1" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="User Account Menu">
+                <span class="avatar-badge bg-secondary text-white" id="dashAvatarBadge">G</span>
+                <span class="d-none d-sm-inline small fw-semibold" id="dashUserShortName">Guest</span>
               </button>
               <ul class="dropdown-menu dropdown-menu-end shadow-lg p-2" style="min-width: 220px;">
                 <li class="px-2 py-1 border-bottom border-secondary border-opacity-25 mb-1">
-                  <div class="fw-bold small">Priya Sharma</div>
-                  <div class="text-muted small" style="font-size: 0.75rem;">Corporate Event Lead</div>
-                  <div class="text-warning small" style="font-size: 0.72rem;">TechSphere Global</div>
+                  <div class="fw-bold small" id="dashDropdownUserName">Guest</div>
+                  <div class="text-muted small" id="dashDropdownRole" style="font-size: 0.75rem;">Guest Account</div>
+                  <div class="text-warning small" id="dashDropdownOrg" style="font-size: 0.72rem;">TechSphere Global</div>
                 </li>
                 <li><a class="dropdown-item small py-2 rounded" href="#profile" data-t="profile">👤 Organization Profile</a></li>
                 <li><a class="dropdown-item small py-2 rounded" href="#requirements" data-t="requirements">📝 Event Brief Specs</a></li>
@@ -158,9 +154,18 @@
         <div class="cover-page-overlay"></div>
         <div class="position-relative z-2 d-flex justify-content-between align-items-center flex-wrap gap-3">
           <div>
-            <span class="badge badge-gold mb-2">Corporate Production Suite</span>
-            <h1 class="h3 font-serif mb-1 text-white" style="text-shadow: 0 2px 10px rgba(0,0,0,0.8);">Client Event Planning Dashboard</h1>
-            <p class="text-white small mb-0" style="text-shadow: 0 1px 4px rgba(0,0,0,0.8);">TechSphere Global · Annual Gala & Holiday Celebration 2026 · Target Date: Dec 18, 2026</p>
+            <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+              <span class="badge badge-gold">Corporate Production Suite</span>
+              <span class="badge bg-black bg-opacity-40 text-warning border border-warning border-opacity-25 d-inline-flex align-items-center gap-1" id="dashSalutationBadge">
+                <span>👋</span> <span id="dashSalutationText">Welcome, Guest!</span>
+              </span>
+            </div>
+            <h1 class="h3 font-serif mb-1 text-white" style="text-shadow: 0 2px 10px rgba(0,0,0,0.8);" id="dashHeroHeading">
+              Welcome, <span id="dashUserName">Guest</span>!
+            </h1>
+            <p class="text-white small mb-0" style="text-shadow: 0 1px 4px rgba(0,0,0,0.8);">
+              <span class="opacity-90 fw-semibold">Client Event Planning Dashboard</span> · TechSphere Global · Annual Gala & Holiday Celebration 2026 · Target Date: Dec 18, 2026
+            </p>
           </div>
           <div class="d-flex align-items-center gap-2">
             <a href="contact.html" class="btn btn-sm btn-gold">Contact Producer</a>
@@ -287,7 +292,7 @@
             </div>
             <div class="col-md-6">
               <label class="form-label small fw-semibold" for="rd">Event Date <span class="text-danger">*</span></label>
-              <input id="rd" type="date" class="form-control" data-rule="futuredate" value="2026-12-18" required>
+              <input id="rd" type="date" class="form-control" data-rule="futuredate" value="2026-12-18" min="2026-10-26" required>
               <div class="invalid-feedback"></div>
             </div>
             <div class="col-md-6">

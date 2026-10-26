@@ -72,7 +72,91 @@
     return Math.round((completedTasks / totalTasks) * 100);
   }
 
+
+  // Dynamic Dashboard User & Salutation Handler (Guest by default)
+  function getActiveDashboardUser() {
+    try {
+      var stored = localStorage.getItem('eg_logged_user') || sessionStorage.getItem('eg_current_user');
+      if (stored) {
+        var parsed = JSON.parse(stored);
+        if (parsed && typeof parsed === 'object') {
+          var candidateName = parsed.name || parsed.username || '';
+          if (typeof candidateName === 'string' && candidateName.trim().length > 0) {
+            return candidateName.trim();
+          }
+        }
+      }
+    } catch (e) {}
+    return 'Guest';
+  }
+
+  function getInitials(name) {
+    if (!name || name === 'Guest') return 'G';
+    var parts = name.trim().split(/\s+/);
+    if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+    return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
+  }
+
+  window.updateDashboardUser = function() {
+    var username = getActiveDashboardUser();
+    var welcomeText = 'Welcome, ' + username + '!';
+
+    // Update main heading
+    var nameEl = document.getElementById('dashUserName');
+    if (nameEl) nameEl.textContent = username;
+
+    var heroHeading = document.getElementById('dashHeroHeading');
+    if (heroHeading) heroHeading.innerHTML = 'Welcome, <span id="dashUserName">' + username + '</span>!';
+
+    // Update hero badge
+    var badgeText = document.getElementById('dashSalutationText');
+    if (badgeText) badgeText.textContent = welcomeText;
+
+    // Update topbar breadcrumb
+    var topbarEl = document.getElementById('topbarSalutation');
+    if (topbarEl) topbarEl.textContent = welcomeText;
+
+    // Update top-right account dropdown
+    var avatarEl = document.getElementById('dashAvatarBadge');
+    var shortNameEl = document.getElementById('dashUserShortName');
+    var dropdownNameEl = document.getElementById('dashDropdownUserName');
+    var dropdownRoleEl = document.getElementById('dashDropdownRole');
+
+    if (username === 'Guest') {
+      if (avatarEl) {
+        avatarEl.textContent = 'G';
+        avatarEl.className = 'avatar-badge bg-secondary text-white';
+      }
+      if (shortNameEl) shortNameEl.textContent = 'Guest';
+      if (dropdownNameEl) dropdownNameEl.textContent = 'Guest';
+      if (dropdownRoleEl) dropdownRoleEl.textContent = 'Guest Access';
+    } else {
+      if (avatarEl) {
+        avatarEl.textContent = getInitials(username);
+        avatarEl.className = 'avatar-badge bg-warning text-dark';
+      }
+      if (shortNameEl) {
+        var firstName = username.split(' ')[0];
+        shortNameEl.textContent = firstName;
+      }
+      if (dropdownNameEl) dropdownNameEl.textContent = username;
+      if (dropdownRoleEl) dropdownRoleEl.textContent = 'Corporate Event Lead';
+    }
+
+    // Synchronize Profile Input (pn)
+    var profNameInput = document.getElementById('pn');
+    if (profNameInput) {
+      profNameInput.value = (username === 'Guest') ? 'Guest' : username;
+    }
+  };
+
+  // Re-sync dashboard user dynamically on storage changes, custom auth events, and window focus
+  window.addEventListener('storage', window.updateDashboardUser);
+  window.addEventListener('authChange', window.updateDashboardUser);
+  window.addEventListener('focus', window.updateDashboardUser);
+
   function render() {
+    window.updateDashboardUser();
     var progressPercent = calculateProgress();
     var totalSpent = state.budget.reduce(function(sum, b) { return sum + b.spent; }, 0);
     var totalAllocated = state.budget.reduce(function(sum, b) { return sum + b.allocated; }, 0);
@@ -369,8 +453,32 @@
   // Handle logout confirmation
   var logoutBtn = document.getElementById('btnConfirmLogout');
   if (logoutBtn) {
-    logoutBtn.addEventListener('click', function() {
-      sessionStorage.setItem('eg_logged_out', 'true');
+    logoutBtn.addEventListener('click', function(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      localStorage.removeItem('eg_logged_user');
+      sessionStorage.removeItem('eg_current_user');
+
+      // Dismiss bootstrap modal
+      var modalEl = document.getElementById('logoutModal');
+      if (modalEl && window.bootstrap && window.bootstrap.Modal) {
+        var modalInst = window.bootstrap.Modal.getInstance(modalEl);
+        if (modalInst) modalInst.hide();
+      }
+
+      // Reset dashboard dynamically to Guest immediately without reload
+      window.updateDashboardUser();
+
+      // Trigger global header update
+      if (typeof window.updateAuthHeader === 'function') {
+        window.updateAuthHeader();
+      }
+
+      window.dispatchEvent(new CustomEvent('authChange'));
+
+      // Show logout confirmation popup
+      if (typeof window.popup === 'function') {
+        window.popup('Logged Out', 'You have logged out successfully!', true);
+      }
     });
   }
 

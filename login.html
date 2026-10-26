@@ -19,13 +19,15 @@
 
   <!-- Minimal Auth Topbar (Sticky) -->
   <header class="auth-topbar sticky-top">
-    <a class="d-flex align-items-center gap-2 text-decoration-none" href="index.html" title="Back to Homepage">
-      <img src="assets/img/favicon/logo.svg" alt="Evergreen Events Logo" width="32" height="32" class="site-logo">
-      <span class="brand fs-5">Evergreen Events</span>
-    </a>
-    <div class="d-flex align-items-center gap-2">
+    <div class="d-flex align-items-center gap-2 ms-auto">
       <button class="btn btn-sm btn-ghost" data-theme-toggle title="Toggle Dark/Light Mode" aria-label="Toggle theme">◐</button>
       <button class="btn btn-sm btn-ghost" data-dir-toggle title="Toggle RTL/LTR Layout" aria-label="Toggle text direction">⇄</button>
+      <a class="btn btn-sm btn-ghost auth-signin-btn" href="login.html">Sign In</a>
+      <div class="auth-user-slot d-none align-items-center gap-2">
+        <span class="auth-username small fw-semibold text-truncate" style="max-width: 140px;"></span>
+        <span class="opacity-25">|</span>
+        <button type="button" class="btn btn-sm btn-ghost auth-logout-btn p-0 border-0 fw-semibold text-danger">Logout</button>
+      </div>
     </div>
   </header>
 
@@ -38,9 +40,15 @@
         <div class="col-md-8 col-lg-5">
           <div class="card p-4 p-md-5 shadow-lg border-warning border-opacity-25">
             <div class="text-center mb-4">
+              <div class="mb-3">
+                <a href="index.html" class="auth-brand-link" title="Back to Evergreen Events Homepage">
+                  <img src="assets/img/favicon/logo.svg" alt="Evergreen Events Logo" width="38" height="38" class="site-logo flex-shrink-0">
+                  <span class="brand">Evergreen Events</span>
+                </a>
+              </div>
               <span class="badge badge-gold mb-2">Client Portal</span>
               <h2 class="font-serif mb-1">Corporate Login</h2>
-              <p class="small text-muted">Access your real-time RSVP tracker, vendor contracts & budget.</p>
+              <p class="small text-muted mb-0">Access your real-time RSVP tracker, vendor contracts & budget.</p>
             </div>
 
             <!-- Safe Logout Alert Banner -->
@@ -50,7 +58,7 @@
             </div>
 
             <!-- Demo Credentials Pill Notice -->
-            <div class="p-2 mb-3 bg-light border rounded small text-muted text-center">
+            <div id="demoCredsBtn" class="p-2 mb-3 bg-light border rounded small text-muted text-center" style="cursor: pointer;" title="Click to auto-fill demo credentials">
               🔑 Demo Access: <strong>client@techsphere.com</strong> / <strong>Corporate2026!</strong>
             </div>
 
@@ -58,7 +66,7 @@
               <!-- Email -->
               <div class="mb-3">
                 <label class="form-label small fw-semibold" for="loginEmail">Work Email Address <span class="text-danger">*</span></label>
-                <input id="loginEmail" type="email" class="form-control" data-rule="email" placeholder="name@company.com" value="client@techsphere.com" required>
+                <input id="loginEmail" type="email" class="form-control" data-rule="email" placeholder="name@company.com" required>
                 <div class="invalid-feedback"></div>
               </div>
 
@@ -69,7 +77,7 @@
                   <a href="#" class="small text-decoration-none" data-bs-toggle="modal" data-bs-target="#forgotModal">Forgot password?</a>
                 </div>
                 <div class="input-group">
-                  <input id="loginPass" type="password" class="form-control" data-rule="pass" placeholder="••••••••" value="Corporate2026!" required>
+                  <input id="loginPass" type="password" class="form-control" data-rule="pass" placeholder="••••••••" required>
                   <button type="button" class="btn btn-ghost" data-pw="loginPass" aria-label="Toggle password visibility">Show</button>
                 </div>
                 <div class="invalid-feedback"></div>
@@ -82,11 +90,40 @@
               </div>
 
               <!-- Submit -->
-              <button type="submit" class="btn btn-gold btn-lg w-100 mb-3">Sign In</button>
+              <button type="submit" class="btn btn-gold btn-lg w-100 mb-2">Sign In</button>
+
+              <!-- Guest Login Button -->
+              <button type="button" class="btn btn-outline-secondary w-100 py-2 d-flex align-items-center justify-content-center gap-2 mb-3 auth-guest-btn" id="guestLoginBtn" title="Instant Guest Access">
+                <span>👤</span>
+                <span class="fw-semibold">Continue as Guest</span>
+              </button>
+
+              <!-- Social Divider -->
+              <div class="d-flex align-items-center my-3">
+                <hr class="flex-grow-1 my-0 opacity-25">
+                <span class="px-3 small text-muted">or continue with</span>
+                <hr class="flex-grow-1 my-0 opacity-25">
+              </div>
+
+              <!-- Social Auth Buttons -->
+              <div class="row g-2 mb-4">
+                <div class="col-6">
+                  <button type="button" class="btn btn-outline-secondary w-100 py-2 d-flex align-items-center justify-content-center gap-2 auth-social-btn" data-social="Google" aria-label="Sign in with Google">
+                    <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+                    <span class="small fw-semibold">Google</span>
+                  </button>
+                </div>
+                <div class="col-6">
+                  <button type="button" class="btn btn-outline-secondary w-100 py-2 d-flex align-items-center justify-content-center gap-2 auth-social-btn" data-social="Apple" aria-label="Sign in with Apple">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.42c.62-.75 1.04-1.8 0.93-2.85-.9.04-1.98.6-2.62 1.35-.57.65-1.07 1.71-.93 2.73 1 .08 2.01-.48 2.62-1.23z"/></svg>
+                    <span class="small fw-semibold">Apple</span>
+                  </button>
+                </div>
+              </div>
 
               <div class="text-center small text-muted">
                 Don't have a corporate client account yet?
-                <a href="register.html" class="fw-semibold">Register here</a>
+                <a href="register.html" class="fw-semibold">Create account</a>
               </div>
             </form>
           </div>
@@ -124,6 +161,41 @@
   <script src="assets/js/main.js"></script>
   <script src="assets/js/validation.js"></script>
   <script>
+        // Autofill demo credentials when clicking the demo pill
+        // Guest Login Handler
+    var guestBtn = document.getElementById('guestLoginBtn');
+    if (guestBtn) {
+      guestBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var guestUser = {
+          name: 'Guest',
+          email: 'guest@evergreen-events.example',
+          isGuest: true
+        };
+        try {
+          localStorage.setItem('eg_logged_user', JSON.stringify(guestUser));
+          sessionStorage.setItem('eg_current_user', JSON.stringify(guestUser));
+        } catch (err) {}
+
+        if (typeof window.updateAuthHeader === 'function') {
+          window.updateAuthHeader();
+        }
+        window.dispatchEvent(new CustomEvent('authChange', { detail: guestUser }));
+
+        window.popup('Guest Access', 'Signed in as Guest! Welcome to Evergreen Events.', true);
+      });
+    }
+
+    var demoBtn = document.getElementById('demoCredsBtn');
+    if (demoBtn) {
+      demoBtn.addEventListener('click', function() {
+        var emailInput = document.getElementById('loginEmail');
+        var passInput = document.getElementById('loginPass');
+        if (emailInput) emailInput.value = 'client@techsphere.com';
+        if (passInput) passInput.value = 'Corporate2026!';
+      });
+    }
+
     if (sessionStorage.getItem('eg_logged_out') === 'true') {
       sessionStorage.removeItem('eg_logged_out');
       var notice = document.getElementById('logoutNotice');

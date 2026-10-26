@@ -61,8 +61,12 @@
           <div class="nav-actions">
             <button class="btn btn-sm btn-ghost" data-theme-toggle title="Toggle Dark/Light Mode" aria-label="Toggle theme">◐</button>
             <button class="btn btn-sm btn-ghost" data-dir-toggle title="Toggle RTL/LTR Layout" aria-label="Toggle text direction">⇄</button>
-            <a class="btn btn-sm btn-ghost" href="login.html">Login</a>
-            <a class="btn btn-sm btn-ghost" href="register.html">Sign Up</a>
+            <a class="btn btn-sm btn-ghost auth-signin-btn" href="login.html">Sign In</a>
+            <div class="auth-user-slot d-none align-items-center gap-2">
+              <span class="auth-username small fw-semibold text-truncate" style="max-width: 140px;"></span>
+              <span class="opacity-25">|</span>
+              <button type="button" class="btn btn-sm btn-ghost auth-logout-btn p-0 border-0 fw-semibold text-danger">Logout</button>
+            </div>
             <a class="btn btn-gold btn-sm" href="contact.html">Plan an Event</a>
           </div>
         </div>

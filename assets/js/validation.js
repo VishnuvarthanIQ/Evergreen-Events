@@ -39,7 +39,9 @@
     },
     futuredate: function(val) {
       if (!val) return 'Please select your target event date';
-      var selected = new Date(val);
+      var parts = val.split('-');
+      if (parts.length !== 3) return 'Please select a valid date';
+      var selected = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
       var today = new Date();
       today.setHours(0, 0, 0, 0);
       if (selected < today) return 'Event date cannot be in the past';
@@ -178,6 +180,33 @@
       }
     });
 
+
+  // Corporate client credentials manager (localStorage-backed)
+  function getRegisteredUsers() {
+    try {
+      var stored = localStorage.getItem('eg_registered_users');
+      if (stored) {
+        var parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (err) {
+      console.error('Error reading registered users from localStorage:', err);
+    }
+    // Default pre-seeded demo corporate client
+    var defaultUsers = [
+      {
+        name: 'TechSphere Admin',
+        email: 'client@techsphere.com',
+        password: 'Corporate2026!',
+        phone: '9876543210'
+      }
+    ];
+    try {
+      localStorage.setItem('eg_registered_users', JSON.stringify(defaultUsers));
+    } catch (e) {}
+    return defaultUsers;
+  }
+
     // Submit handler
     form.addEventListener('submit', function(e) {
       e.preventDefault();
@@ -201,9 +230,80 @@
       var successMsg = form.dataset.msg || 'Your request has been received! Our dedicated corporate planner will connect within 24 hours.';
 
       if (customAction === 'login') {
-        window.popup('Sign In Successful', 'Sign-in form submitted successfully.', true);
+        var loginEmailInput = form.querySelector('#loginEmail, [type="email"]');
+        var loginPassInput = form.querySelector('#loginPass, [type="password"]');
+
+        var emailVal = loginEmailInput ? loginEmailInput.value.trim().toLowerCase() : '';
+        var passVal = loginPassInput ? loginPassInput.value : '';
+
+        var users = getRegisteredUsers();
+        var user = users.find(function(u) {
+          return u.email && u.email.toLowerCase() === emailVal;
+        });
+
+        if (!user) {
+          window.popup('Account Not Found', 'Account not found. Please sign up first.', false);
+          return;
+        }
+
+        if (user.password !== passVal) {
+          window.popup('Incorrect Credentials', 'Incorrect email or password. Please try again.', false);
+          return;
+        }
+
+        // Login successful - preserve session in localStorage and update header
+        try {
+          localStorage.setItem('eg_logged_user', JSON.stringify(user));
+          sessionStorage.setItem('eg_current_user', JSON.stringify(user));
+        } catch (err) {}
+
+        if (typeof window.updateAuthHeader === 'function') {
+          window.updateAuthHeader();
+        }
+        window.dispatchEvent(new CustomEvent('authChange', { detail: user }));
+
+        window.popup('Login Successful', 'Login successful! Welcome back.', true);
+        return;
       } else if (customAction === 'register') {
-        window.popup('Registration Successful', 'Registration form submitted successfully.', true);
+        var regNameInput = form.querySelector('#regName, [data-rule="name"]');
+        var regEmailInput = form.querySelector('#regEmail, [data-rule="email"]');
+        var regPhoneInput = form.querySelector('#regPhone, [data-rule="phone"]');
+        var regPassInput = form.querySelector('#regPass, [data-rule="pass"]');
+
+        var regEmailVal = regEmailInput ? regEmailInput.value.trim().toLowerCase() : '';
+        var regPassVal = regPassInput ? regPassInput.value : '';
+        var regNameVal = regNameInput ? regNameInput.value.trim() : '';
+        var regPhoneVal = regPhoneInput ? regPhoneInput.value.trim() : '';
+
+        var usersList = getRegisteredUsers();
+        var emailExists = usersList.some(function(u) {
+          return u.email && u.email.toLowerCase() === regEmailVal;
+        });
+
+        if (emailExists) {
+          window.popup('Account Already Exists', 'An account with this email address already exists. Please sign in instead.', false);
+          return;
+        }
+
+        var newUser = {
+          name: regNameVal,
+          email: regEmailVal,
+          password: regPassVal,
+          phone: regPhoneVal,
+          registeredAt: new Date().toISOString()
+        };
+
+        usersList.push(newUser);
+        try {
+          localStorage.setItem('eg_registered_users', JSON.stringify(usersList));
+        } catch (err) {
+          console.error('Error saving user to localStorage:', err);
+        }
+
+        window.popup('Registration Successful', 'Registration successful! You can now sign in.', true);
+        form.reset();
+        form.querySelectorAll('.is-valid').forEach(function(el) { el.classList.remove('is-valid'); });
+        return;
       } else {
         window.popup('Thank You!', successMsg, true);
         form.reset();
@@ -211,4 +311,55 @@
       }
     });
   });
+
+  
+  // Social Auth Buttons Click Handler (Google & Apple)
+  function initSocialAuth() {
+    document.querySelectorAll('.auth-social-btn').forEach(function(btn) {
+      if (btn.dataset.initialized) return;
+      btn.dataset.initialized = 'true';
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var provider = btn.getAttribute('data-social') || 'Social';
+        var isRegister = document.querySelector('form[data-action="register"]') !== null;
+        var actionType = isRegister ? 'Sign-Up' : 'Sign-In';
+        var hint = isRegister ? 'Please complete the registration form using your corporate email.' : 'Please sign in using your registered corporate email and password.';
+        
+        window.popup(
+          provider + ' ' + actionType,
+          provider + ' authentication is currently in demo mode. ' + hint,
+          false
+        );
+      });
+    });
+  }
+
+  initSocialAuth();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSocialAuth);
+  }
+
+  // Set minimum date to today for all future date inputs so past dates are visible but disabled / unclickable
+  function enforceMinDate() {
+    var now = new Date();
+    var yyyy = now.getFullYear();
+    var mm = String(now.getMonth() + 1).padStart(2, '0');
+    var dd = String(now.getDate()).padStart(2, '0');
+    var todayStr = yyyy + '-' + mm + '-' + dd;
+
+    var dateInputs = document.querySelectorAll('input[type="date"][data-rule="futuredate"], input[type="date"]');
+    dateInputs.forEach(function(input) {
+      if (!input.hasAttribute('data-allow-past')) {
+        input.min = todayStr;
+      }
+    });
+  }
+
+  // Enforce on script load, DOM ready, modal display, and window focus
+  enforceMinDate();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', enforceMinDate);
+  }
+  document.addEventListener('show.bs.modal', enforceMinDate);
+  window.addEventListener('focus', enforceMinDate);
 })();
