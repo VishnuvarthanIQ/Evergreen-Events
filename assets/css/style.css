@@ -1200,6 +1200,39 @@ textarea:focus:not(:focus-visible) {
   display: flex;
   align-items: center;
   gap: 0.35rem;
+  min-height: 1.35rem;
+}
+
+.profession-card-title,
+.profession-card-body h5 {
+  font-size: 1.25rem;
+  line-height: 1.35;
+  min-height: 3.38rem;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.profession-card-desc,
+.profession-card-body p {
+  min-height: 4.85rem;
+  margin-bottom: 1rem;
+  line-height: 1.55;
+}
+
+.profession-card-features,
+.profession-card-body .text-warning {
+  min-height: 2.75rem;
+  display: block;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  margin-top: auto;
+  margin-bottom: 1rem !important;
+}
+
+.profession-card-footer,
+.profession-card-body .border-top {
+  margin-top: 0 !important;
 }
 
 /* Config Archetype Buttons - High-Contrast Dark Console */
